@@ -1,0 +1,4 @@
+https://fedoraproject.org/wiki/Anaconda/Kickstart/es#install
+http://docs.oracle.com/cd/E24628_01/em.121/e27046/appdx_pxeboot.htm
+http://docs.fedoraproject.org/es-ES/Fedora/13/html/Installation_Guide/sn-booting-from-pxe-x86.html
+http://docs.fedoraproject.org/en-US/Fedora/17/html/Installation_Guide/s1-netboot-pxe-config.html
