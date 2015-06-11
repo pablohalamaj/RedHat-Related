@@ -1,14 +1,126 @@
+Prerequisitos del Software:
+	
+	-- Todos los hosts deben tener resolucion inversa de sus fqdn
+		# hostname -f
+		# dig -x <ip>
+	-- Todos los hosts deben tener sincronizada la hora contra un ntpd
+		# yum install -y ntp
+		# chkconfig ntpd on ; service ntpd start
+
+	-- La resolucion DNS del subdominio de las Apps debe dirigirse al broker
+		-- En el caso del subdominio apps.example.com
+		# nslookup -query=any apps.example.com | grep nameserver
+		apps.example.com    nameserver = broker01.example.com.  
+
+	-- Todos los hosts deben tener activado iptables y selinux en modo enforcing
+
+Prerequisitos de Canales:
+
+	--Red Hat Enterprise Linux 6 Server
+	--Red Hat Software Collections 1
+	--OpenShift Enterprise Infrastructure (broker and supporting services)
+	--OpenShift Enterprise Application Node
+	--OpenShift Enterprise Client Tools
+	--JBoss Enterprise Web Server 2
+	--JBoss Enterprise Application Platform 6
+	--Red Hat OpenShift Enterprise JBoss EAP add-on
+
+-----INSTALACION-----
+
+Instalar el Soft:
 
 
+En el broker:
+
+	-- Generar una Key sin password --
+	# ssh-keygen 
+
+	-- Brindar acceso mediante esa Key a todos los equipos
+	# for host in <broker1 broker2 nodo1 nodo2> ; do  ssh-copy-id $host ; done
+
+	# yum install -y ruby
+	# cd /root
+	# mkdir oo-install-ose ; cd oo-install-ose
+	# tar -xzf ../oo-install-ose.tgz 
+	# ./oo-install-ose 
+
+Respuestas a las preguntas
+
+	Use OpenShift to manage DNS for hosted applications? Y
+	What domain name should be used for all of the hosted apps in your
+	OpenShift system? apps.example.com	
+	Do you want to register DNS entries for your OpenShift hosts with the
+	same OpenShift DNS service that will be managing DNS records for the
+	hosted applications? (y/n/q) N
+
+	TODO - Poner bien todas las Preguntas!!!!
+	
+
+Para validar la configuracion:
+
+En el broker
+
+        # subscription-manager repos --enable rhel-6-server-ose-2.2-infra-rpms
+        # oo-admin-yum-validator -o 2.2 -r broker --fix-all
+
+En los nodos
+
+        # subscription-manager repos --enable rhel-6-server-ose-2.2-infra-rpms
+        # oo-admin-yum-validator -o 2.2 -r node --fix-all
+
+	
+-----POST-INSTALACION-----
 
 
+Habilitar la Consola de Administracion:
 
+	Agregar las lineas marcadas con "+" en el archivo /etc/httpd/conf.d/000002_openshift_origin_broker_proxy.conf
+	-----------------------------------------------------
+	  ProxyPass /broker http://127.0.0.1:8080/broker
+	 +ProxyPass /admin-console http://127.0.0.1:8080/admin-console
+	 +ProxyPass /assets http://127.0.0.1:8080/assets
+	  ProxyPassReverse / http://127.0.0.1:8080/
+	-----------------------------------------------------
+	
+	Reiniciar el apache
+	#service httpd restart
+	
 
+Agregar nuevos Valores de Gears:
+	
+	En el broker:
+	Editar el archivo /etc/openshift/broker.conf poner los nombres de los valores de gear requeridos
+	Por ejemplo para gears small,medium y large:
+		---------------------------------------
+		VALID_GEAR_SIZES="small,medium,large"
+		---------------------------------------
 
+	Reiniciar openshift:
+	# service openshift-broker restart
 
+	En el nodo que va a ejecutar dichos gears:
+	Editar /etc/openshift/resource_limits.conf
+	node_profile define el nombre del gear
+		------------------------------------
+		node_profile=medium
+		-----------------------------------
+	El resto de los valores define el tamaño de RAM, CPU y Disco que tendra dicho gear.
 
+	Luego de editar el archivo , reiniciar servicios
+	# service ruby193-mcollective restart ; oo-cgroup-enable --with-all-containers ;oo-pam-enable --with-all-containers ; oo-admin-ctl-tc restart
 
+	Crear un Distrito para gears medium
+	
+	En el broker
+	# oo-admin-ctl-district -c create -n medium_district -p medium
 
+	Liberar a un Nodo de un distrito
+	# oo-admin-ctl-district -c deactivate-node -n Default -i nodo02.example.com
+	# oo-admin-ctl-district -c remove-node -n Default -i nodo02.example.com
+
+	Agregar el Nodo al distrito previamente creado
+	# oo-admin-ctl-district --command add-node -n medium_district -i nodo02.example.com
+	
 
 Crear un usuario
 
@@ -24,7 +136,7 @@ Listar al usuario:
 
 # oo-admin-ctl-user -l username
 
-Habilitarle tamaños de Gears
+Habilitarle tamaños de Gears a ese usuario:
 
 # oo-admin-ctl-user -l username --addgearsize medium
 
