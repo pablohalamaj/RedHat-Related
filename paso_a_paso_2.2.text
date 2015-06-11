@@ -1,0 +1,31 @@
+
+
+
+
+
+
+
+
+
+
+
+
+Crear un usuario
+
+# htpasswd -m /etc/openshift/htpasswd username
+
+
+Modificar Gear de usuarios:
+(https://access.redhat.com/documentation/en-US/OpenShift_Enterprise/2/html/Administration_Guide/Setting_Gear_Quotas_for_Specific_Users.html)
+
+Nota: El usuario tiene que haberse logueado al menos una vez!!
+
+Listar al usuario:
+
+# oo-admin-ctl-user -l username
+
+Habilitarle tamaños de Gears
+
+# oo-admin-ctl-user -l username --addgearsize medium
+
+
