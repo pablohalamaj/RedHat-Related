@@ -46,15 +46,458 @@ En el broker:
 
 Respuestas a las preguntas
 
-	Use OpenShift to manage DNS for hosted applications? Y
-	What domain name should be used for all of the hosted apps in your
-	OpenShift system? apps.example.com	
-	Do you want to register DNS entries for your OpenShift hosts with the
-	same OpenShift DNS service that will be managing DNS records for the
-	hosted applications? (y/n/q) N
+##-----Ejemplo------------------------##
+##------------------------------------##
+...looks good.
+Using bundled assets.
+Extracting oo-install to temporary directory...
+Starting oo-install...
+OpenShift Installer (OpenShift Enterprise 2.2 - Build 20150505-1447)
+----------------------------------------------------------------------
 
-	TODO - Poner bien todas las Preguntas!!!!
-	
+Welcome to OpenShift.
+
+This installer will guide you through a basic system deployment, based
+on one of the scenarios below.
+
+Select from the following installation scenarios.
+You can also type '?' for Help or 'q' to Quit:
+1. Install OpenShift Enterprise
+2. Add a Node to OpenShift Enterprise
+Type a selection and press <return>: 1
+
+It looks like you are running oo-install for the first time on a new
+system. The installer will guide you through the process of defining
+your OpenShift deployment.
+
+----------------------------------------------------------------------
+DNS Configuration
+----------------------------------------------------------------------
+
+First off, we will configure some DNS information for this system.
+
+Do you want me to install a new DNS server for OpenShift-hosted
+applications, or do you want this system to use an existing DNS
+server? (Answer 'yes' to have me install a DNS server.) (y/n/q/?) Y
+
+All of your hosted applications will have a DNS name of the form:
+
+<app_name>-<owner_namespace>.<all_applications_domain>
+
+What domain name should be used for all of the hosted apps in your
+OpenShift system? |example.com| cloud.semperti.local
+
+Do you want to register DNS entries for your OpenShift hosts with the
+same OpenShift DNS service that will be managing DNS records for the
+hosted applications? (y/n/q) n
+
+You have indicated that you want the installer to deploy DNS. Please configure a host to use as the nameserver.
+
+Hostname (the FQDN that other OpenShift hosts will use to connect to
+the host that you are describing): ose-install-temp.semperti.local
+
+Hostname / IP address for SSH access to
+ose-install-temp.semperti.local from the host where you are running
+oo-install. You can say 'localhost' if you are running oo-install from
+the system that you are describing: |ose-install-temp.semperti.local| 
+
+Username for SSH access to ose-install-temp.semperti.local: |root| 
+
+Validating root@ose-install-temp.semperti.local... looks good.
+
+Detected IP address 10.252.7.131 at interface eth0 for this host.
+Do you want Nodes to use this IP information to reach this host?
+(y/n/q/?) y
+
+Normally, the BIND DNS server that is installed on this host will be
+reachable from other OpenShift components using the host's configured
+IP address (10.252.7.131).
+
+If that will work in your deployment, press <enter> to accept the
+default value. Otherwise, provide an alternate IP address that will
+enable other OpenShift components to reach the BIND DNS service on
+this host: |10.252.7.131| 
+
+That's all of the DNS information that we need right now. Next, we
+need to gather information about the hosts in your OpenShift
+deployment.
+
+----------------------------------------------------------------------
+Broker Configuration
+----------------------------------------------------------------------
+
+Okay. I'm going to need you to tell me about the host where you want
+to install the Broker.
+
+Do you want to assign the Broker role to
+ose-install-temp.semperti.local? (y/n/q/?) y
+
+Okay. Adding the Broker role to ose-install-temp.semperti.local.
+
+That's everything we need to know right now for this Broker.
+
+Do you want to configure an additional Broker? (y/n/q) n
+
+Moving on to the next role.
+
+----------------------------------------------------------------------
+Node Configuration
+----------------------------------------------------------------------
+
+Okay. I'm going to need you to tell me about the host where you want
+to install the Node.
+
+Do you want to assign the Node role to
+ose-install-temp.semperti.local? (y/n/q/?) n      
+
+Okay, please provide information about this Node host.
+
+Hostname (the FQDN that other OpenShift hosts will use to connect to
+the host that you are describing): ose-install-temp-nodo.semperti.local
+
+Hostname / IP address for SSH access to
+ose-install-temp-nodo.semperti.local from the host where you are
+running oo-install. You can say 'localhost' if you are running
+oo-install from the system that you are describing:
+|ose-install-temp-nodo.semperti.local| 
+
+Username for SSH access to ose-install-temp-nodo.semperti.local:
+|root| 
+
+Validating root@ose-install-temp-nodo.semperti.local... looks good.
+
+Detected IP address 10.252.7.163 at interface eth0 for this host.
+Do you want to use this as the public IP information for this Node?
+(y/n/q/?) y
+
+That's everything we need to know right now for this Node.
+
+Currently you have described the following host system(s):
+* ose-install-temp-nodo.semperti.local (Node)
+* ose-install-temp.semperti.local (Broker, NameServer)
+
+Do you want to configure an additional Node? (y/n/q)y
+----- Aca vuelve a pedir todo para el otro nodo-------
+Do you want to configure an additional Node? (y/n/q)n
+
+Do you want to manually specify usernames and passwords for the
+various supporting service accounts? Answer 'N' to have the values
+generated for you (y/n/q) N
+
+Here are the details of your current deployment.
+
+Note: ActiveMQ and MongoDB will be installed on all Broker instances.
+For more flexibility, rerun the installer in advanced mode (-a).
+
+DNS Settings
+  * Installer will deploy DNS
+  * Application Domain: cloud.semperti.local
+  * Register OpenShift hosts with DNS? No
+
+Global Gear Settings
++-------------------------+-------+
+| Valid Gear Sizes        | small |
+| User Default Gear Sizes | small |
+| Default Gear Size       | small |
++-------------------------+-------+
+
+Account Settings
++----------------------------+------------------------------------------------------------------+
+| OpenShift Console User     | demo                                                             |  <- Usuario Default!!!
+| OpenShift Console Password | 4I5nUzw4l3DfMg12NYfFqw                                           |  <- Password!!!
+| Broker Session Secret      | 9ovqMSfMgr6K7kHFTGcng                                            |
+| Console Session Secret     | 9MrjyN76x8r0sYxxNrvElw                                           |
+| Broker Auth Salt           | pMKgJoz2XYuSYFhb5iuQw                                            |
+| Broker Auth Private Key    | -----BEGIN RSA PRIVATE KEY-----                                  |
+|                            | MIIEowIBAAKCAQEAyySBDCppGoFagPDTUowEiRAI9gj1rKiyjpBQazzEG2a7I01f |
+|                            | OacPkqnh+wdlh5v87vmVha5jn/Cumw6taNyCgHil1g9i7OPOaFMCmNgUM1t4ovXR |
+|                            | swUBVQP50nxaXUGObwfT8LaBpqrFo44+mxMlHK7nx4PS95nTOJjBVevo6wYwCrRt |
+|                            | 6xpmMB4iqnzCw8BUTi1u/2zEHocK7RPlONhfva9eqpSrC/QN4bjDiSTElXc+PwId |
+|                            | H6fuxyAHUuSwlX0IoiFmOsJnzlXI3WwYkRjTvi2GJB7EhQR9R/1JZy9yYziFNitA |
+|                            | xxsN+adDwYXYFInkQgihjTssO1ABd2tgIH5GQQIDAQABAoIBACjIQlQT65fTojzC |
+|                            | nFo1G+/8VSA3ukKYd4hhdpOg1mn93NIAhX6IiHrUOjbwTDTGXygG2TrGQN/qLNOa |
+|                            | RbwIkPaDwh9QZXbTYSvWhm3y61NIKNbmbNv4xESyEKRuLKIOOC8YLjdkHHE+VYE5 |
+|                            | XF47oLa6cnO+hksJCbuSBzZdrxwHfP1KcTgXgEQxq+vKbqyMfZkUuypZFVvff3OD |
+|                            | 3XN0zqM+LVG4PCqY06LV/zRE5Ebo0P+zqIgExSE4OaFRP5gxw8wyk6l7PrOJHyPe |
+|                            | QhxOvt6FhC1yDhXLtgFmMKu4VMAPx/iMewZJEPO2lTZ+jMlsjZK/cOtp25tCWeNM |
+|                            | cSI5lVUCgYEA+zWXm81ocja3Pv7iu4x9j/0O4Kc+f6XB4GPiBMLVBjCIp1m0WiTy |
+|                            | E+ZjuSdzWOJkBLs7/T5GMSAp/OduVfmeHRgvhGgPo8OMWz1w0d0SuXiJoWfZfg4B |
+|                            | EgsGpdNrSW8Auf0MrAa0jxEbaBhgqcqmp4/OXXwPIh/cHhbpm9T8Q7cCgYEAzwQ/ |
+|                            | 0IeRX9765iHlM8YEF4tPT7C55h/BdoQ6IJsEEWIYhVAHXnyiebTJfen9XxhURbRT |
+|                            | nRg06IRR9cPXAAu+T0waKVjWwh7A5IxcXl8sWi8j2cgdl2kHCrVNnKH4VdqVElVN |
+|                            | 6NnFXXIyTCRahv68okHwaZBtYHThHmXZ62QldccCgYEA+sewl2BDAaov21q23IZP |
+|                            | HzyA6rLrSKEgYDM2goxB/5DaCz8ZNdimNkmMil2g4D35nWORaqoNhqNWZ1xeoMO2 |
+|                            | HdN0NFlyK4lfCALZKxjoxXFY7GHxFM9EMFADje32r/N5pTLCwMVc4WoxkwSrEzX0 |
+|                            | k1iTqm3b6bQmmX9ELUY9pBcCgYBP2cS/q7sgbsL6h7KAIO4tIrgp9fIO2Mrn6yL8 |
+|                            | tq6AAgWRTog5IvwM0/YwklQAHUNMS71AyDiIQ5nVoX/J7b2vmpwwvKrB39jpj1aF |
+|                            | tFJISwyaEX2QjJuBvuM7+qHug8yicLMHkRB29fh+tDsS/SlHsQWJwoLeBNdcwU6o |
+|                            | ZE2quwKBgE3ZLLRGOgkcpEffuISAXvFKljKlKPH00OrnbK5Pq7S0c01eMEuWqZ5C |
+|                            | PApyKODhsGQEvrw9a28SPHNYCHxX+IahDRgBKB5ley8QlYkUL8COEGiy/9m3IBm6 |
+|                            | 26Sp080a8L02gAuWD3Wu6nThC7nRq/i1idQs/N4dzoZTovYQp5M1             |
+|                            | -----END RSA PRIVATE KEY-----                                    |
+| MCollective User           | mcollective                                                      |
+| MCollective Password       | 6SjqMyOqXdbsUsgDFj1ojw                                           |
+| MongoDB Admin User         | admin                                                            |
+| MongoDB Admin Password     | hxH0ZbuS0Zb0USETbdFiTg                                           |
+| MongoDB Broker User        | openshift                                                        |
+| MongoDB Broker Password    | n8wEV4KGLb5ffgMh2FYGA                                            |
++----------------------------+------------------------------------------------------------------+
+
+Node Districts
++----------+-----------+--------------------------------------+
+| District | Gear Size | Nodes                                |
++----------+-----------+--------------------------------------+
+| Default  | small     | ose-install-temp-nodo.semperti.local |
++----------+-----------+--------------------------------------+
+
+Role Assignments
++------------+--------------------------------------+
+| Broker     | ose-install-temp.semperti.local      |
+| NameServer | ose-install-temp.semperti.local      |
+| Node       | ose-install-temp-nodo.semperti.local |
++------------+--------------------------------------+
+
+Host Information
++--------------------------------------+------------+
+| Hostname                             | Roles      |
++--------------------------------------+------------+
+| ose-install-temp-nodo.semperti.local | Node       |
+| ose-install-temp.semperti.local      | Broker     |
+|                                      | NameServer |
++--------------------------------------+------------+
+
+Choose an action:
+1. Change the deployment configuration
+2. View the full host configuration details
+3. Proceed with deployment
+Type a selection and press <return>: 3
+
+Here is the subscription configuration that the installer will use for
+this deployment.
++---------+-------+
+| Setting | Value |
++---------+-------+
+| type    | none  |
++---------+-------+
+
+-------- Este ejemplo es de LAB , en un cliente hay que usar la configuracion de suscripcion que tengan --------
+-------- Satellite, RHN, Susbscription Manager , etc -------------------------------------
+
+Do you want to make any changes to the subscription info in the
+configuration file? (y/n/q/?) n
+
+Do you want to set any temporary subscription settings for this
+installation only? (y/n/q/?) n
+
+Preflight check: verifying system and resource availability.
+
+---------------------------------------------------------
+----------- Para ver en que anda la Instalacion ---------
+----------- # tail -f /tmp/openshift-deploy.log ---------
+----------- En cada equipo a instalar 		---------
+---------------------------------------------------------
+
+Checking ose-install-temp.semperti.local:
+* SSH connection succeeded
+* Target host is running Red Hat Enterprise Linux
+* Located getenforce
+* SELinux is running in enforcing mode
+* Located yum
+* openssh-clients RPM is installed.
+
+Checking ose-install-temp-nodo.semperti.local:
+* SSH connection succeeded
+* Target host is running Red Hat Enterprise Linux
+* Located getenforce
+* SELinux is running in enforcing mode
+* Located yum
+* openssh-clients RPM is installed.
+
+Deploying workflow 'enterprise_deploy'.
+hosts for installation=#<Installer::HostInstance:0x7f7fa9f04dc8>#<Installer::HostInstance:0x7f7fa9f04da0>
+
+ose-install-temp.semperti.local : Configuring package repositories.
+ose-install-temp-nodo.semperti.local : Configuring package repositories.
+ose-install-temp-nodo.semperti.local: 
+        OpenShift: Begin preflight validation.
+        OpenShift: Completed preflight validation.
+        OpenShift: Begin configuring repos.
+        OpenShift: Completed configuring repos.
+ose-install-temp-nodo.semperti.local : Completed configuring package repositories.
+ose-install-temp.semperti.local: 
+        OpenShift: Begin preflight validation.
+        OpenShift: Completed preflight validation.
+        OpenShift: Begin configuring repos.
+        OpenShift: Completed configuring repos.
+ose-install-temp.semperti.local : Completed configuring package repositories.
+
+Step Prepare completed successfully.
+
+ose-install-temp.semperti.local : Installing RPMs. This step can take up to an hour.
+ose-install-temp-nodo.semperti.local : Installing RPMs. This step can take up to an hour.
+ose-install-temp.semperti.local: 
+        OpenShift: Begin installing RPMs.
+        OpenShift: yum update
+        OpenShift: yum install ntp ntpdate wget
+        OpenShift: yum install bind bind-utils
+        OpenShift: yum install mongodb-server mongodb
+        OpenShift: yum install activemq
+        OpenShift: yum install openshift-origin-broker openshift-origin-broker-util rubygem-openshift-origin-msg-broker-mcollective ruby193-mcollective-client rubygem-openshift-origin-auth-remote-user rubygem-openshift-origin-dns-nsupdate openshift-origin-console rubygem-openshift-origin-admin-console policycoreutils-python
+        OpenShift: yum install rhc
+        OpenShift: Completed installing RPMs.
+ose-install-temp.semperti.local : Completed installing RPMs.
+ose-install-temp-nodo.semperti.local: 
+        OpenShift: Begin installing RPMs.
+        OpenShift: yum update
+        OpenShift: yum install ntp ntpdate wget
+        OpenShift: yum install rubygem-openshift-origin-node ruby193-rubygem-passenger-native openshift-origin-node-util ruby193-mcollective openshift-origin-msg-node-mcollective policycoreutils-python rubygem-openshift-origin-container-selinux rubygem-openshift-origin-frontend-nodejs-websocket rubygem-openshift-origin-frontend-haproxy-sni-proxy rubygem-openshift-origin-frontend-apache-vhost
+        OpenShift: yum install openshift-origin-cartridge-cron openshift-origin-cartridge-dependencies-recommended-jbossews openshift-origin-cartridge-dependencies-recommended-nodejs openshift-origin-cartridge-dependencies-recommended-perl openshift-origin-cartridge-dependencies-recommended-php openshift-origin-cartridge-dependencies-recommended-python openshift-origin-cartridge-dependencies-recommended-ruby openshift-origin-cartridge-diy openshift-origin-cartridge-haproxy openshift-origin-cartridge-jbossews openshift-origin-cartridge-jenkins openshift-origin-cartridge-jenkins-client openshift-origin-cartridge-mongodb openshift-origin-cartridge-mysql openshift-origin-cartridge-nodejs openshift-origin-cartridge-perl openshift-origin-cartridge-php openshift-origin-cartridge-postgresql openshift-origin-cartridge-python openshift-origin-cartridge-ruby
+        OpenShift: Completed installing RPMs.
+ose-install-temp-nodo.semperti.local : Completed installing RPMs.
+
+Step Install RPMs completed successfully.
+
+ose-install-temp.semperti.local : Configuring host.
+ose-install-temp-nodo.semperti.local : Configuring host.
+ose-install-temp-nodo.semperti.local: 
+        OpenShift: Begin configuring host.
+        OpenShift: Completed configuring host.
+ose-install-temp-nodo.semperti.local : Completed configuring host.
+ose-install-temp.semperti.local: 
+        OpenShift: Begin configuring host.
+        OpenShift: Completed configuring host.
+ose-install-temp.semperti.local : Completed configuring host.
+
+Step Configure Host completed successfully.
+
+ose-install-temp.semperti.local : Configuring OpenShift.
+ose-install-temp.semperti.local: 
+        OpenShift: Begin configuring OpenShift.
+        OpenShift: Waiting for MongoDB to start (13:02:48)...
+        OpenShift: MongoDB is ready! (13:02:54)
+        OpenShift: Completed configuring OpenShift.
+        OpenShift: Begin restarting services.
+        OpenShift: Completed restarting services.
+ose-install-temp.semperti.local : Completed configuring OpenShift.
+
+Step Configure OpenShift completed successfully.
+
+ose-install-temp-nodo.semperti.local : Configuring OpenShift.
+ose-install-temp-nodo.semperti.local: 
+        OpenShift: Begin configuring OpenShift.
+        OpenShift: Completed configuring OpenShift.
+        OpenShift: Begin restarting services.
+        OpenShift: Completed restarting services.
+ose-install-temp-nodo.semperti.local : Completed configuring OpenShift.
+
+Step Configure OpenShift completed successfully.
+
+ose-install-temp.semperti.local : Performing post deploy steps.
+ose-install-temp-nodo.semperti.local : Performing post deploy steps.
+ose-install-temp-nodo.semperti.local: 
+        OpenShift: Begin post deployment steps.
+        OpenShift: Completed post deployment steps.
+ose-install-temp-nodo.semperti.local : Completed post deploy steps.
+ose-install-temp.semperti.local: 
+        OpenShift: Begin post deployment steps.
+        OpenShift: Begin restarting services.
+        OpenShift: Completed restarting services.
+        OpenShift: Configuring districts.
+        OpenShift: Adding nodes: ose-install-temp-nodo.semperti.local with profile: small to district: Default.
+        OpenShift: Completed configuring districts.
+        OpenShift: Completed post deployment steps.
+ose-install-temp.semperti.local : Completed post deploy steps.
+
+Step Post Deploy completed successfully.
+
+ose-install-temp.semperti.local : Validating installation.
+ose-install-temp-nodo.semperti.local : Validating installation.
+ose-install-temp-nodo.semperti.local: 
+        OpenShift: Begin running oo-diagnostics.
+        OpenShift: oo-diagnostics output - WARN: test_selinux_enabled
+        OpenShift: oo-diagnostics output -             The following recent entries in /var/log/audit/audit.log likely indicate problems:
+        OpenShift: oo-diagnostics output -             
+        OpenShift: oo-diagnostics output - type=AVC msg=audit(1434123855.302:10): avc:  denied  { open } for  pid=1269 comm="ovirt-guest-age" name="online" dev=sysfs ino=23 scontext=system_u:system_r:rhev_agentd_t:s0 tcontext=system_u:object_r:sysfs_t:s0 tclass=file
+        OpenShift: oo-diagnostics output - type=AVC msg=audit(1434123960.638:9): avc:  denied  { read } for  pid=1217 comm="ovirt-guest-age" name="online" dev=sysfs ino=23 scontext=system_u:system_r:rhev_agentd_t:s0 tcontext=system_u:object_r:sysfs_t:s0 tclass=file
+        OpenShift: oo-diagnostics output - type=AVC msg=audit(1434123960.638:9): avc:  denied  { open } for  pid=1217 comm="ovirt-guest-age" name="online" dev=sysfs ino=23 scontext=system_u:system_r:rhev_agentd_t:s0 tcontext=system_u:object_r:sysfs_t:s0 tclass=file
+        OpenShift: oo-diagnostics output - type=AVC msg=audit(1434124041.016:9): avc:  denied  { read } for  pid=1219 comm="ovirt-guest-age" name="online" dev=sysfs ino=23 scontext=system_u:system_r:rhev_agentd_t:s0 tcontext=system_u:object_r:sysfs_t:s0 tclass=file
+        OpenShift: oo-diagnostics output - type=AVC msg=audit(1434124041.016:9): avc:  denied  { open } for  pid=1219 comm="ovirt-guest-age" name="online" dev=sysfs ino=23 scontext=system_u:system_r:rhev_agentd_t:s0 tcontext=system_u:object_r:sysfs_t:s0 tclass=file
+        OpenShift: oo-diagnostics output - 
+        OpenShift: oo-diagnostics output -             Note that SELinux violations are not always logged in the audit log.
+        OpenShift: oo-diagnostics output - 
+        OpenShift: oo-diagnostics output - WARN: test_altered_package_owned_configs
+        OpenShift: oo-diagnostics output -           The mlocate package is not installed. mlocate is not a required runtime package; however,
+        OpenShift: oo-diagnostics output -           you may install mlocate to enable further diagnostics checking.
+        OpenShift: oo-diagnostics output - 
+        OpenShift: oo-diagnostics output - WARN: test_yum_configuration
+        OpenShift: oo-diagnostics output -         oo-admin-yum-validator reported some possible problems
+        OpenShift: oo-diagnostics output -         with your package source configuration:
+        OpenShift: oo-diagnostics output - --------------------------------------------------------------
+        OpenShift: oo-diagnostics output -       No roles have been specified. Attempting to guess the roles for this system...
+        OpenShift: oo-diagnostics output - If the roles listed below are incorrect or incomplete, please re-run this script with the appropriate --role arguments
+        OpenShift: oo-diagnostics output -     node
+        OpenShift: oo-diagnostics output - Could not determine subscription type.
+        OpenShift: oo-diagnostics output - Please attach an OpenShift subscription to this system using either RHN Classic or Red Hat Subscription Manager by following the instructions here: https://access.redhat.com/site/articles/522923
+        OpenShift: oo-diagnostics output - Could not determine product version. Please re-run this script with the --oo-version argument.
+        OpenShift: oo-diagnostics output - Please re-run this tool after making any recommended repairs to this system
+        OpenShift: oo-diagnostics output - 
+        OpenShift: oo-diagnostics output - --------------------------------------------------------------
+        OpenShift: oo-diagnostics output -         Incorrect package source configuration could lead to
+        OpenShift: oo-diagnostics output -         failure to install the correct RPMs.
+        OpenShift: oo-diagnostics output - 
+        OpenShift: oo-diagnostics output - 3 WARNINGS
+        OpenShift: oo-diagnostics output - NO ERRORS
+        OpenShift: Completed running oo-diagnostics.
+ose-install-temp-nodo.semperti.local : Completed validation.
+ose-install-temp.semperti.local: 
+        OpenShift: Begin running oo-diagnostics.
+        OpenShift: oo-diagnostics output - WARN: test_selinux_enabled
+        OpenShift: oo-diagnostics output -             The following recent entries in /var/log/audit/audit.log likely indicate problems:
+        OpenShift: oo-diagnostics output -             
+        OpenShift: oo-diagnostics output - type=AVC msg=audit(1434121956.107:10): avc:  denied  { open } for  pid=1217 comm="ovirt-guest-age" name="online" dev=sysfs ino=23 scontext=system_u:system_r:rhev_agentd_t:s0 tcontext=system_u:object_r:sysfs_t:s0 tclass=file
+        OpenShift: oo-diagnostics output - type=AVC msg=audit(1434122457.284:45): avc:  denied  { read } for  pid=1217 comm="ovirt-guest-age" name="online" dev=sysfs ino=23 scontext=system_u:system_r:rhev_agentd_t:s0 tcontext=system_u:object_r:sysfs_t:s0 tclass=file
+        OpenShift: oo-diagnostics output - type=AVC msg=audit(1434122457.284:45): avc:  denied  { open } for  pid=1217 comm="ovirt-guest-age" name="online" dev=sysfs ino=23 scontext=system_u:system_r:rhev_agentd_t:s0 tcontext=system_u:object_r:sysfs_t:s0 tclass=file
+        OpenShift: oo-diagnostics output - type=AVC msg=audit(1434122577.588:71): avc:  denied  { read } for  pid=1217 comm="ovirt-guest-age" name="online" dev=sysfs ino=23 scontext=system_u:system_r:rhev_agentd_t:s0 tcontext=system_u:object_r:sysfs_t:s0 tclass=file
+        OpenShift: oo-diagnostics output - type=AVC msg=audit(1434122577.588:71): avc:  denied  { open } for  pid=1217 comm="ovirt-guest-age" name="online" dev=sysfs ino=23 scontext=system_u:system_r:rhev_agentd_t:s0 tcontext=system_u:object_r:sysfs_t:s0 tclass=file
+        OpenShift: oo-diagnostics output - 
+        OpenShift: oo-diagnostics output -             Note that SELinux violations are not always logged in the audit log.
+        OpenShift: oo-diagnostics output - 
+        OpenShift: oo-diagnostics output - WARN: test_altered_package_owned_configs
+        OpenShift: oo-diagnostics output -           The mlocate package is not installed. mlocate is not a required runtime package; however,
+        OpenShift: oo-diagnostics output -           you may install mlocate to enable further diagnostics checking.
+        OpenShift: oo-diagnostics output - 
+        OpenShift: oo-diagnostics output - WARN: test_broker_certificate
+        OpenShift: oo-diagnostics output - Using a self-signed certificate for the broker
+        OpenShift: oo-diagnostics output - WARN: test_yum_configuration
+        OpenShift: oo-diagnostics output -         oo-admin-yum-validator reported some possible problems
+        OpenShift: oo-diagnostics output -         with your package source configuration:
+        OpenShift: oo-diagnostics output - --------------------------------------------------------------
+        OpenShift: oo-diagnostics output -       No roles have been specified. Attempting to guess the roles for this system...
+        OpenShift: oo-diagnostics output - If the roles listed below are incorrect or incomplete, please re-run this script with the appropriate --role arguments
+        OpenShift: oo-diagnostics output -     broker
+        OpenShift: oo-diagnostics output -     client
+        OpenShift: oo-diagnostics output - Could not determine subscription type.
+        OpenShift: oo-diagnostics output - Please attach an OpenShift subscription to this system using either RHN Classic or Red Hat Subscription Manager by following the instructions here: https://access.redhat.com/site/articles/522923
+        OpenShift: oo-diagnostics output - Could not determine product version. Please re-run this script with the --oo-version argument.
+        OpenShift: oo-diagnostics output - Please re-run this tool after making any recommended repairs to this system
+        OpenShift: oo-diagnostics output - 
+        OpenShift: oo-diagnostics output - --------------------------------------------------------------
+        OpenShift: oo-diagnostics output -         Incorrect package source configuration could lead to
+        OpenShift: oo-diagnostics output -         failure to install the correct RPMs.
+        OpenShift: oo-diagnostics output - 
+        OpenShift: oo-diagnostics output - 4 WARNINGS
+        OpenShift: oo-diagnostics output - NO ERRORS
+        OpenShift: Completed running oo-diagnostics.
+ose-install-temp.semperti.local : Completed validation.
+
+Step Validate completed successfully.
+
+All tasks completed.
+oo-install exited; removing temporary assets.
+##-----------------------##
+##-----------------------##
+
+---------------------------------
 
 Para validar la configuracion:
 
@@ -84,7 +527,9 @@ Habilitar la Consola de Administracion:
 	
 	Reiniciar el apache
 	#service httpd restart
-	
+
+URL de Acceso: https://<fqdn-broker>
+URL de Consola de Administracion: https://<fqdn-broker>/admin-console/
 
 Agregar nuevos Valores de Gears:
 	
@@ -139,5 +584,16 @@ Listar al usuario:
 Habilitarle tamaños de Gears a ese usuario:
 
 # oo-admin-ctl-user -l username --addgearsize medium
+
+Habilitar el TeamView
+
+	Enabling Global Team Visibility for New Accounts
+	Set the following variable in the /etc/openshift/broker.conf file to "true":
+
+	DEFAULT_VIEW_GLOBAL_TEAMS = "true"
+
+	Next, restart the broker service for the changes to take effect:
+
+	# service openshift-broker restart
 
 
