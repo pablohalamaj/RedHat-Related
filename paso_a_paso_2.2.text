@@ -38,6 +38,8 @@ En el broker:
 	-- Brindar acceso mediante esa Key a todos los equipos
 	# for host in <broker1 broker2 nodo1 nodo2> ; do  ssh-copy-id $host ; done
 
+	-- El instalador oo-install-ose se baja de https://install.openshift.com/portable/oo-install-ose.tgz --
+
 	# yum install -y ruby
 	# cd /root
 	# mkdir oo-install-ose ; cd oo-install-ose
